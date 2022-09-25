@@ -1,25 +1,29 @@
 <?php
 
+require_once __DIR__ . '/../Traits/Address.php';
+
 class Building
 {
     public $type;
-    public $typePayment;
-    public $price;
-    use Position;
+    private $typePayment;
+    private $price;
 
-    public function __construct($type, $typePayment)
+    use Address;
+
+    public function __construct($type, $typePayment, $address)
     {
         $this->type = $type;
         $this->typePayment = $typePayment;
+        $this->address = $address;
     }
 
     public function GetHouseInfo()
     {
         echo "<ul>";
-            echo "<li>" . $this->type . ':' . "</li>";
-            echo "<li>" . "Via" . ' ' . $this->location . "</li>";
-            echo "<li>" . $this->typePayment . "</li>";
-            echo "<li>" . $this->price . "</li>";
+            echo "<li>" . "<b>" . 'Tipologia ' . "</b>" . $this->type . "</li>";
+            echo "<li>" . $this->getAddress() . "</li>";
+            echo "<li>" . "<b>" . 'Tipologia Pagamento: ' . "</b>" . $this->typePayment . "</li>";
+            echo "<li>" . "<b>" . 'Prezzo: ' . "</b>" . $this->price . "</li>";
         echo "</ul>";
     }
 
@@ -30,9 +34,10 @@ class Building
         } elseif ($typeP == 'Vendita') {
             $price = $randomPrice * 1000;
             $price = number_format( $price, 0, "", ".");
-        } else {
-            throw new Exception('Errore, Il formato di pagamento non è corretto!');
         }
-        return $this->price = $price;
+        else {
+            throw new Exception('Errore');
+        }
+        return $this->price = $price .= ' €';
     }
 }
