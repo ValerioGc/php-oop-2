@@ -41,6 +41,6 @@
 
 <div align="center">
   <img align="center" src="/preview/oop2.png" alt="Thumbnails google-faq" />
- <div>
+</div>
    
 --------
